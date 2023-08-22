@@ -14,9 +14,10 @@
  и
 `UUID`
  перед запуском скрипта этого вебприложения:
-
-`export AUTHOR="Your Author Name"`
-`export UUID="Your UUID"`
+```
+export AUTHOR="Your Author Name"
+export UUID="Your UUID"
+```
 
 Запуск скрипта:
 
