@@ -30,3 +30,7 @@ http://localhost:8000/author
 http://localhost:8000/id
 
 * *создано при помощи ChatGPT EasyCode VSCode extension* *
+
+билд докер-образа 
+
+`docker build -t andreevg/flaskwebapp:0.0.1 .`
