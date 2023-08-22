@@ -26,10 +26,12 @@ export UUID="Your UUID"
 После запуска доступ к веприложение в браузере по url
 
 http://localhost:8000/hostname
+
 http://localhost:8000/author
+
 http://localhost:8000/id
 
-* *создано при помощи ChatGPT EasyCode VSCode extension* *
+*создано при помощи ChatGPT EasyCode VSCode extension*
 
 билд докер-образа 
 
