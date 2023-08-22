@@ -1,0 +1,35 @@
+---
+- hosts: ubuntuserver
+  become: true
+  gather_facts: false
+      
+  tasks:
+ 
+  - name: Create a cloudru user
+    user:
+      name: cloudru
+      password: '$6$C/2ZHtfrDY5MM$A/jNUWv7XfoEfsNlgpwsndjkJ3l9gV6W48nCXDhRsuVC8gcuckXrVdUqif/Sfr/Mznkv2oN0UH/yD0oiXQ4IE.'
+      state: present
+  
+  - name: Set cloudru user authorized key
+    ansible.posix.authorized_key:
+      user: cloudru
+      state: present
+      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCfrfE0OluoNHb5dOpV4RpWmVXvMBWc17kaM7DDjCm7romNQMDX95i5Fc67Q3c47pvrm/qi/ZqsCeqNdLl5+VV41rVz701Pj/UUr2FZpIm80Ur0iM1DFy81GKo/lS1INopqdd4KvUnM2d8yqfJSm9m5Cq7AM9S0mqObuMayfqNR4YcOlm9fnEMqhrSWbBVvdghPNiBzs7T9RzEq/0w8rs743tCF7MICv72fdgYadrGlxFsFWSujwZXQLI4VUSxKirJBCUgfR0u84gZK/wUzJ4EPqMichniTf24AsvidozUHWMDmQ+pUaBTyxjD5egi8LcV0EHH4feHwzacA2gyGbOtFK3wpa/dgE1yvPTkPKnccIXKnbel0mfxfsBVkclc5/DnczmrdaGrX5DCrQbI+HO4lhr4KzAm/pw6qfLcw8KjCdVKsnCRXykdat8KUwNAeolknRWdKDqdsbyXBj+ePMTlMR8YmoBj9znYWwOnAAyu56utiteL0oq9YPkb7ZGF5ZOE="
+  
+  - name: disable root login
+    lineinfile:
+          dest: /etc/ssh/sshd_config
+          regexp: '^PermitRootLogin'
+          line: "PermitRootLogin no"
+          state: present
+          backup: yes
+    notify:
+       - restart ssh
+
+  handlers:
+   - name: restart ssh
+     systemd:
+       name: sshd
+       state: restarted
+...
