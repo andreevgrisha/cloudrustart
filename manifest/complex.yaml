@@ -50,6 +50,11 @@ spec:
            path: /hostname
            port: 8000
            scheme: HTTP
+       env:
+         - name: UUID
+           valueFrom:
+             fieldRef:
+               fieldPath: metadata.uid
 ---
 apiVersion: v1
 kind: Service
