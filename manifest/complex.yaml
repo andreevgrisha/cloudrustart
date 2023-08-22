@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: backend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: webapp
+ namespace: backend
+ labels:
+   k8s-app: webapp
+spec:
+ replicas: 3
+ strategy:
+   type: RollingUpdate
+   rollingUpdate:
+     maxUnavailable: 1
+ selector:
+   matchLabels:
+     k8s-app: webapp
+ template:
+   metadata:
+     labels:
+       k8s-app: webapp
+   spec:
+     containers:
+     - name: webapp
+       image: andreevg/flaskwebapp:0.0.1
+       imagePullPolicy: IfNotPresent
+       resources:
+         limits:
+           cpu: 200m
+           memory: 200Mi
+       ports:
+       - containerPort: 8000
+         name: webapp
+         protocol: TCP
+       livenessProbe:
+         httpGet:
+           path: /hostname
+           port: 8000
+           scheme: HTTP
+         initialDelaySeconds: 60
+         timeoutSeconds: 5
+         successThreshold: 1
+         failureThreshold: 5
+       readinessProbe:
+         httpGet:
+           path: /hostname
+           port: 8000
+           scheme: HTTP
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: webapp-service
+ namespace: backend
+ labels:
+   k8s-app: webapp
+spec:
+ selector:
+   k8s-app: webapp
+ type: ClusterIP
+ ports:
+ - name: dns-tcp
+   port: 53
+   protocol: TCP
