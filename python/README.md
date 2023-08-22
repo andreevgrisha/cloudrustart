@@ -1,26 +1,26 @@
-Это вебприложение слушает порт 8000 и умеет три метода:
+Это вебприложение слушает порт **8000** и умеет три метода:
 
-GET /hostname
+`GET /hostname`
  возвращает имя хоста сервера
 
-GET /author
+`GET /author`
  возвращает значение переменной окружения AUTHOR или, если она не задана - сообщение 'Author not set'.
 
-GET /id
+`GET /id`
  возвращает значение переменной окружения UUID или, если она не задана - сообщение 'UUID not set'.
 
 Обратите внимание, что необходимо задать переменные
-AUTHOR
+`AUTHOR`
  и
-UUID
- перед запуском скрипта этого вебприложения. Вы можете сделать это в bash/sh:
+`UUID`
+ перед запуском скрипта этого вебприложения:
 
-export AUTHOR="Your Author Name"
-export UUID="Your UUID"
+`export AUTHOR="Your Author Name"`
+`export UUID="Your UUID"`
 
-Запуск скрипта в bash/sh:
+Запуск скрипта:
 
-python webserver.py
+`python webserver.py`
 
 После запуска доступ к веприложение в браузере по url
 
@@ -28,4 +28,4 @@ http://localhost:8000/hostname
 http://localhost:8000/author
 http://localhost:8000/id
 
-создано при помощи ChatGPT EasyCode VSCode extension
+* *создано при помощи ChatGPT EasyCode VSCode extension* *
