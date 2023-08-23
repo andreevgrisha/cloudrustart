@@ -68,6 +68,6 @@ spec:
    k8s-app: webapp
  type: ClusterIP
  ports:
- - name: dns-tcp
-   port: 53
+ - name: webapp
+   port: 8000
    protocol: TCP
